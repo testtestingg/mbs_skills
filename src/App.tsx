@@ -1,4 +1,4 @@
-// App.tsx (Updated with correct color scheme)
+// App.tsx (Updated for MBSkills)
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Settings, ChevronDown, Star } from 'lucide-react';
@@ -50,10 +50,10 @@ function GlobalStyles() {
           --z-index-admin-button: 9999;
           --z-index-contact-modal: 9999;
           
-          /* Corporate color palette - Purple theme */
-          --primary-color: #682cda;
-          --secondary-color: #9333ea;
-          --accent-color: #8b5cf6;
+          /* Corporate color palette - Blue theme */
+          --primary-color: #122138;
+          --secondary-color: #04a3fe;
+          --accent-color: #0288d1;
           --background-color: #FFFFFF;
           --text-color: #1F2937;
           --light-gray: #F9FAFB;
@@ -94,7 +94,7 @@ function GlobalStyles() {
         .language-transition > div {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to-r, rgba(104, 44, 218, 0.1), rgba(147, 51, 234, 0.1));
+          background: linear-gradient(to-r, rgba(18, 33, 56, 0.1), rgba(4, 163, 254, 0.1));
           animation: pulse 2s infinite;
         }
         
@@ -213,7 +213,7 @@ function SupabaseProvider({ children }: SupabaseProviderProps) {
           <p className="mb-6">We're having trouble connecting to our database. Please try again later.</p>
           <button 
             onClick={() => window.location.reload()}
-            className="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full transition-colors"
           >
             Retry
           </button>
@@ -251,7 +251,7 @@ function App() {
   );
 
   // Use custom hook for language detection
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('fr');
   const [isLanguageChanging, setIsLanguageChanging] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [showContactModal, setShowContactModal] = useState(false);
@@ -454,7 +454,7 @@ function App() {
           <div className={`fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-all duration-500 pointer-events-none ${
             isLanguageChanging ? 'opacity-100' : 'opacity-0'
           }`}>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-purple-400/20 animate-pulse" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 animate-pulse" />
           </div> 
 
           {/* Language Detection Banner */}
@@ -543,13 +543,13 @@ function App() {
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, #122138 0%, #04a3fe 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}
           >
-            {t('modernWebsites')}
+            {t('modernTechnologies')}
           </h2>
         </motion.div>
       )}
@@ -566,13 +566,13 @@ function App() {
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, #122138 0%, #04a3fe 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}
           >
-            {t('mobileApps')}
+            {t('practicalSkills')}
           </h2>
         </motion.div>
       )}
@@ -589,13 +589,13 @@ function App() {
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, #122138 0%, #04a3fe 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}
           >
-            {t('finalMessage')}
+            {t('careerOpportunities')}
           </h2>
         </motion.div>
       )}

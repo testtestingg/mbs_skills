@@ -1,4 +1,4 @@
-// TechStackSection.tsx (Updated for translation)
+// TechStackSection.tsx (Updated for MBSkills)
 import React, { memo, useRef, useEffect, useState } from 'react';
 import { Code, Database, Cloud, Monitor, Smartphone, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -10,7 +10,8 @@ interface TechStackSectionProps {
 }
 
 const TechStackSection: React.FC<TechStackSectionProps> = memo(({ language, t }) => {
-  const customPurple = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -65,7 +66,7 @@ const TechStackSection: React.FC<TechStackSectionProps> = memo(({ language, t })
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-gradient pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
@@ -91,7 +92,10 @@ const TechStackSection: React.FC<TechStackSectionProps> = memo(({ language, t })
               viewport={{ once: true }}
             >
               <div 
-                className="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white"
+                className="w-16 h-16 rounded-full flex items-center justify-center mb-4 text-white"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`
+                }}
               >
                 {tech.icon}
               </div>

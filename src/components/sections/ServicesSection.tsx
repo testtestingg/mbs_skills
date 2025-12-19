@@ -1,4 +1,4 @@
-// ServicesSection.tsx (Updated with correct color scheme)
+// ServicesSection.tsx (Updated for MBSkills)
 import React, { useState, memo, useRef, useEffect, useCallback } from 'react';
 import { Globe, Smartphone, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -19,7 +19,8 @@ const ServicesSection: React.FC<ServicesSectionProps> = memo(({ language, t }) =
   const [activeService, setActiveService] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const customPurple = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
 
   // Intersection Observer for performance optimization
   useEffect(() => {
@@ -44,18 +45,18 @@ const ServicesSection: React.FC<ServicesSectionProps> = memo(({ language, t }) =
   const services: Service[] = [
     {
       icon: <Globe className="w-8 h-8" />,
-      title: t('websitesTitle'),
-      description: t('websitesDesc')
+      title: t('webDevelopmentTitle'),
+      description: t('webDevelopmentDesc')
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
-      title: t('appsTitle'),
-      description: t('appsDesc')
+      title: t('mobileDevelopmentTitle'),
+      description: t('mobileDevelopmentDesc')
     },
     {
       icon: <Layers className="w-8 h-8" />,
-      title: t('customTitle'),
-      description: t('customDesc')
+      title: t('dataScienceTitle'),
+      description: t('dataScienceDesc')
     }
   ];
 
@@ -67,7 +68,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = memo(({ language, t }) =
     <motion.section 
       ref={sectionRef}
       id="services" 
-      aria-label="Our services"
+      aria-label="Nos services de formation"
       className="py-24 relative bg-white"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +86,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = memo(({ language, t }) =
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-gradient pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
@@ -113,14 +114,17 @@ const ServicesSection: React.FC<ServicesSectionProps> = memo(({ language, t }) =
                 <div 
                   className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-all duration-300 ${
                     activeService === index 
-                      ? 'bg-purple-600 text-white scale-110' 
-                      : 'bg-purple-100 text-purple-600'
+                      ? 'text-white scale-110' 
+                      : 'text-blue-600'
                   }`}
+                  style={{
+                    backgroundColor: activeService === index ? secondaryColor : '#f0f9ff'
+                  }}
                 >
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 pb-1">
-                  {service.title} {language === 'fr' ? 'Tunisie' : language === 'en' ? 'Tunisia' : 'تونس'}
+                <h3 className="text-xl font-bold mb-3 pb-1" style={{ color: primaryColor }}>
+                  {service.title}
                 </h3>
                 <p className="text-gray-600 flex-grow">{service.description}</p>
               </div>

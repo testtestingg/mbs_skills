@@ -1,13 +1,11 @@
-// App.tsx (Updated for MBSkills)
-import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+// App.tsx (Updated for MBSkills - Frontend Only)
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Settings, ChevronDown, Star } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import SEO from './components/SEO';
 import PageViewTracker from './components/PageViewTracker';
 import { analyticsService } from "./services/analyticsService";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 import { Analytics } from '@vercel/analytics/react';
-import { supabase } from './lib/supabaseClient';
 
 // Import all section components
 import Navigation from './components/Navigation';
@@ -22,8 +20,6 @@ import FAQSection from './components/sections/FAQSection';
 import FooterSection from './components/sections/FooterSection';
 import LanguageBanner from './components/LanguageBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import AdminLogin from "./components/AdminLogin";
-import AdminDashboard from "./components/AdminDashboard";
 
 // Import the new GamePage component
 import GamePage from './components/GamePage';
@@ -46,7 +42,6 @@ function GlobalStyles() {
           --z-index-content: 10;
           --z-index-navigation: 1000;
           --z-index-mobile-menu: 1001;
-          --z-index-admin-button: 9999;
           --z-index-contact-modal: 9999;
           
           /* Corporate color palette - Blue theme */
@@ -174,64 +169,6 @@ function GlobalStyles() {
   );
 }
 
-// Supabase Provider Component
-interface SupabaseProviderProps {
-  children: React.ReactNode;
-}
-
-function SupabaseProvider({ children }: SupabaseProviderProps) {
-  const [isSupabaseReady, setIsSupabaseReady] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const checkSupabaseConnection = async () => {
-      try {
-        // Simple health check - try to get the current user
-        const { data, error } = await supabase.auth.getUser();
-        
-        if (error) {
-          // Even if there's an error (like no user), the connection is working
-          setIsSupabaseReady(true);
-        } else {
-          setIsSupabaseReady(true);
-        }
-      } catch (err) {
-        console.error('Supabase connection error:', err);
-        setError('Failed to connect to Supabase');
-      }
-    };
-
-    checkSupabaseConnection();
-  }, []);
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white text-gray-800 p-4">
-        <div className="text-center max-w-md">
-          <h1 className="text-2xl font-bold mb-4">Service Unavailable</h1>
-          <p className="mb-6">We're having trouble connecting to our database. Please try again later.</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isSupabaseReady) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-gray-800">Loading...</div>
-      </div>
-    );
-  }
-
-  return <>{children}</>;
-}
-
 // Utility function for RTL styling
 const getDirectionStyle = (isRTL: boolean) => {
   return isRTL ? {
@@ -254,11 +191,7 @@ function App() {
   const [isLanguageChanging, setIsLanguageChanging] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [showContactModal, setShowContactModal] = useState(false);
-  const [showAdmin, setShowAdmin] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useLocalStorage('admin_authenticated', false);
-  const [adminError, setAdminError] = useState('');
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
-  const [showAdminButton, setShowAdminButton] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [activeSection, setActiveSection] = useState('hero');
   
@@ -337,30 +270,11 @@ function App() {
   }, []);
   
   useEffect(() => {
-    console.log('App state changed:', {
-      isAdminAuthenticated,
-      showAdmin,
-      adminError
-    });
-  }, [isAdminAuthenticated, showAdmin, adminError]);
-
-  useEffect(() => {
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
     
     // Track page view
     analyticsService.trackPageView('home', language);
-    
-    // Secret admin access: Press Ctrl+Shift+A
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-        setShowAdminButton(true);
-        setTimeout(() => setShowAdminButton(false), 5000); // Hide after 5 seconds
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
   }, [language, isRTL]);
 
   // Translation helper
@@ -389,26 +303,6 @@ function App() {
     analyticsService.trackUserInteraction('contact_modal_open', currentPage, language);
   }, [currentPage, language]);
 
-  const handleAdminLogin = useCallback((success: boolean) => {
-    console.log('handleAdminLogin called with:', success);
-    
-    if (success) {
-      console.log('Setting admin authenticated to true');
-      setIsAdminAuthenticated(true);
-      setShowAdmin(false);
-      setAdminError('');
-    } else {  
-      console.log('Setting admin error');
-      setAdminError('Invalid password. Please try again.');
-    }
-  }, []);
-
-  const handleAdminLogout = useCallback(() => {
-    setIsAdminAuthenticated(false);
-    setShowAdmin(false);
-    setAdminError('');
-  }, []);
-
   // Update scrollToSection to track navigation
   const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -422,16 +316,6 @@ function App() {
     }
   }, [currentPage, language]);
 
-  // If admin is authenticated, show dashboard
-  if (isAdminAuthenticated) {
-    return <AdminDashboard onLogout={handleAdminLogout} />;
-  }
-
-  // If showing admin login
-  if (showAdmin) {
-    return <AdminLogin onLogin={handleAdminLogin} error={adminError} />;
-  }
-
   // If game page is active, show the game
   if (isGamePageActive) {
     return <GamePage onBack={() => setIsGamePageActive(false)} />;
@@ -444,86 +328,71 @@ function App() {
       <PageViewTracker language={language} />
       {process.env.NODE_ENV === 'production' && <Analytics />}
       
-      <SupabaseProvider>
-        <div 
-          style={getDirectionStyle(isRTL)}
-          className="min-h-screen bg-white text-gray-800"
-        >
-          {/* Language Change Overlay */}
-          <div className={`fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-all duration-500 pointer-events-none ${
-            isLanguageChanging ? 'opacity-100' : 'opacity-0'
-          }`}>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 animate-pulse" />
-          </div> 
+      <div 
+        style={getDirectionStyle(isRTL)}
+        className="min-h-screen bg-white text-gray-800"
+      >
+        {/* Language Change Overlay */}
+        <div className={`fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-all duration-500 pointer-events-none ${
+          isLanguageChanging ? 'opacity-100' : 'opacity-0'
+        }`}>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 animate-pulse" />
+        </div> 
 
-          {/* Language Detection Banner */}
-          <LanguageBanner 
-            language={language}
-            changeLanguage={changeLanguage}
-            onClose={() => {
-              setIsLanguageBannerVisible(false);
-              // *** CHANGE: Also save the user's choice when they close the banner ***
-              localStorage.setItem('languageSelected', 'true');
-            }}
-            onPrivacyPolicyOpen={() => setIsPrivacyPolicyOpen(true)}
-            t={t}
-            // *** CHANGE: Add the isVisible prop ***
-            isVisible={isLanguageBannerVisible}
-          />
-          
-          {/* Navigation */}
-          <Navigation 
-            currentPage={currentPage}
-            onNavigate={(page) => {
-              setCurrentPage(page);
-              if (page === 'home') scrollToSection('hero');
-              if (page === 'services') scrollToSection('services');
-              if (page === 'projects') scrollToSection('projects');
-              if (page === 'reference') scrollToSection('testimonials');
-              if (page === 'contact') handleContactOpen();
-              if (page === 'game') setIsGamePageActive(true); // Add navigation to game page
-            }}
-            language={language}
-            changeLanguage={changeLanguage}
-            scrollToSection={scrollToSection}
-            handleContactOpen={handleContactOpen}
-            t={t}
-          />
+        {/* Language Detection Banner */}
+        <LanguageBanner 
+          language={language}
+          changeLanguage={changeLanguage}
+          onClose={() => {
+            setIsLanguageBannerVisible(false);
+            // *** CHANGE: Also save the user's choice when they close the banner ***
+            localStorage.setItem('languageSelected', 'true');
+          }}
+          onPrivacyPolicyOpen={() => setIsPrivacyPolicyOpen(true)}
+          t={t}
+          // *** CHANGE: Add the isVisible prop ***
+          isVisible={isLanguageBannerVisible}
+        />
+        
+        {/* Navigation */}
+        <Navigation 
+          currentPage={currentPage}
+          onNavigate={(page) => {
+            setCurrentPage(page);
+            if (page === 'home') scrollToSection('hero');
+            if (page === 'services') scrollToSection('services');
+            if (page === 'projects') scrollToSection('projects');
+            if (page === 'reference') scrollToSection('testimonials');
+            if (page === 'contact') handleContactOpen();
+            if (page === 'game') setIsGamePageActive(true); // Add navigation to game page
+          }}
+          language={language}
+          changeLanguage={changeLanguage}
+          scrollToSection={scrollToSection}
+          handleContactOpen={handleContactOpen}
+          t={t}
+        />
 
-          {/* Secret Admin Button */}
-          {showAdminButton && (
-            <motion.button
-              onClick={() => setShowAdmin(true)}
-              className="fixed bottom-4 right-4 p-3 bg-red-600 hover:bg-red-700 rounded-full z-[9999]"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              title="Admin Access"
+        {/* Main Content with Semantic HTML */}
+        <main role="main">
+          {/* Hero Section with Animated Robot Component */}
+          <section ref={heroRef} id="hero" aria-label="Hero section" className="min-h-screen flex items-center justify-center relative pt-32 pb-16 bg-white">
+            <div className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <AnimatedHero language={language} handleContactOpen={handleContactOpen} t={t} />
+            </div>
+
+            {/* Scroll Indicator */}
+            <div
+              className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
+                window.scrollY > 50 ? 'opacity-0' : 'opacity-100'
+              }`}
             >
-              <Settings className="h-5 w-5 text-white" />
-            </motion.button>
-          )}
-
-          {/* Main Content with Semantic HTML */}
-          <main role="main">
-            {/* Hero Section with Animated Robot Component */}
-            <section ref={heroRef} id="hero" aria-label="Hero section" className="min-h-screen flex items-center justify-center relative pt-32 pb-16 bg-white">
-              <div className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <AnimatedHero language={language} handleContactOpen={handleContactOpen} t={t} />
+              <div className="flex flex-col items-center space-y-2 animate-bounce">
+                <ChevronDown className="h-6 w-6" style={{ color: 'var(--primary-color)' }} />
+                <ChevronDown className="h-6 w-6" style={{ color: 'var(--primary-color)' }} />
               </div>
-
-              {/* Scroll Indicator */}
-              <div
-                className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
-                  window.scrollY > 50 ? 'opacity-0' : 'opacity-100'
-                }`}
-              >
-                <div className="flex flex-col items-center space-y-2 animate-bounce">
-                  <ChevronDown className="h-6 w-6" style={{ color: 'var(--primary-color)' }} />
-                  <ChevronDown className="h-6 w-6" style={{ color: 'var(--primary-color)' }} />
-                </div>
-              </div>
-            </section>
+            </div>
+          </section>
 
 {/* Animation Section */}
 <section ref={scrollSectionRef} id="scroll-section" className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
@@ -602,32 +471,31 @@ function App() {
   </div>
 </section>
 
-            {/* About Section */}
-            <AboutSection ref={aboutRef} language={language} t={t} />
+          {/* About Section */}
+          <AboutSection ref={aboutRef} language={language} t={t} />
 
-            {/* Services Section */}
-            <ServicesSection ref={servicesRef} language={language} t={t} />
+          {/* Services Section */}
+          <ServicesSection ref={servicesRef} language={language} t={t} />
 
-            {/* Projects Section - New */}
-            <ProjectsSection ref={projectsRef} language={language} t={t} />
+          {/* Projects Section - New */}
+          <ProjectsSection ref={projectsRef} language={language} t={t} />
 
-            {/* Tech Stack Section */}
-            <TechStackSection language={language} t={t} />
+          {/* Tech Stack Section */}
+          <TechStackSection language={language} t={t} />
 
-            {/* Pricing Section */}
-            <PricingSection ref={pricingRef} language={language} t={t} handleContactOpen={handleContactOpen} />
+          {/* Pricing Section */}
+          <PricingSection ref={pricingRef} language={language} t={t} handleContactOpen={handleContactOpen} />
 
-            {/* Testimonials Section */}
-            <TestimonialsSection ref={testimonialsRef} language={language} t={t} />
+          {/* Testimonials Section */}
+          <TestimonialsSection ref={testimonialsRef} language={language} t={t} />
 
-            {/* FAQ Section */}
-            <FAQSection ref={faqRef} language={language} t={t} />
-          </main>
+          {/* FAQ Section */}
+          <FAQSection ref={faqRef} language={language} t={t} />
+        </main>
 
-          {/* Footer */}
-          <FooterSection language={language} t={t} />
-        </div>
-      </SupabaseProvider>
+        {/* Footer */}
+        <FooterSection language={language} t={t} />
+      </div>
       
       {/* Privacy Policy Modal */}
       <PrivacyPolicy

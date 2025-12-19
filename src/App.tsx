@@ -7,6 +7,7 @@ import PageViewTracker from './components/PageViewTracker';
 import { analyticsService } from "./services/analyticsService";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { Analytics } from '@vercel/analytics/react';
+import { supabase } from './lib/supabaseClient';
 
 // Import all section components
 import Navigation from './components/Navigation';
@@ -23,6 +24,7 @@ import LanguageBanner from './components/LanguageBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
+import ContactPage from "./ContactPage";
 
 // Import the new GamePage component
 import GamePage from './components/GamePage';
@@ -171,6 +173,64 @@ function GlobalStyles() {
       `}
     </style>
   );
+}
+
+// Supabase Provider Component
+interface SupabaseProviderProps {
+  children: React.ReactNode;
+}
+
+function SupabaseProvider({ children }: SupabaseProviderProps) {
+  const [isSupabaseReady, setIsSupabaseReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkSupabaseConnection = async () => {
+      try {
+        // Simple health check - try to get the current user
+        const { data, error } = await supabase.auth.getUser();
+        
+        if (error) {
+          // Even if there's an error (like no user), the connection is working
+          setIsSupabaseReady(true);
+        } else {
+          setIsSupabaseReady(true);
+        }
+      } catch (err) {
+        console.error('Supabase connection error:', err);
+        setError('Failed to connect to Supabase');
+      }
+    };
+
+    checkSupabaseConnection();
+  }, []);
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white text-gray-800 p-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-2xl font-bold mb-4">Service Unavailable</h1>
+          <p className="mb-6">We're having trouble connecting to our database. Please try again later.</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isSupabaseReady) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-gray-800">Loading...</div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
 }
 
 // Utility function for RTL styling
@@ -569,6 +629,14 @@ function App() {
           <FooterSection language={language} t={t} />
         </div>
       </SupabaseProvider>
+      
+      {/* Contact Modal */}
+      <ContactPage 
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        language={language}
+        translations={translations}
+      />
       
       {/* Privacy Policy Modal */}
       <PrivacyPolicy

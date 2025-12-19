@@ -24,7 +24,6 @@ import LanguageBanner from './components/LanguageBanner';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
-import ContactPage from "./ContactPage";
 
 // Import the new GamePage component
 import GamePage from './components/GamePage';
@@ -629,14 +628,6 @@ function App() {
           <FooterSection language={language} t={t} />
         </div>
       </SupabaseProvider>
-      
-      {/* Contact Modal */}
-      <ContactPage 
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
-        language={language}
-        translations={translations}
-      />
       
       {/* Privacy Policy Modal */}
       <PrivacyPolicy

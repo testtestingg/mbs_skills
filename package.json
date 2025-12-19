@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",
-    "@supabase/supabase-js": "^2.57.4",
     "@vercel/analytics": "^1.5.0",
     "chart.js": "^4.5.0",
     "framer-motion": "^12.23.12",

@@ -1,294 +1,326 @@
-// ProjectsSection.tsx (Updated for MBSkills)
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Language } from '../../types';
+// translations/index.ts (Fixed for MBSkills)
 
-interface Course {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  link?: string;
-}
-
-interface ProjectsSectionProps {
-  language: Language;
-  t: (key: string) => string;
-}
-
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
-  // Updated Colors
-  const primaryColor = '#122138';
-  const secondaryColor = '#04a3fe';
-
-  const coursesData: Course[] = [
-    // WEB DEVELOPMENT COURSE
-    {
-      title: "DÉVELOPPEMENT WEB FULL STACK",
-      description:
-        language === "fr"
-          ? "Formation complète en développement web front-end et back-end avec HTML5, CSS3, JavaScript, React et Node.js."
-          : language === "en"
-          ? "Complete training in front-end and back-end web development with HTML5, CSS3, JavaScript, React and Node.js."
-          : "تدريب شامل في تطوير الواجهة الأمامية والخلفية للويب باستخدام HTML5 و CSS3 و JavaScript و React و Node.js.",
-      image: "https://i.ibb.co/353PrMdM/Screen-Recording2025-12-14at1-56-35-PM-ezgif-com-video-to-gif-converter.gif",
-      tags: ["HTML5", "CSS3", "JavaScript", "React", "Node.js"],
-      link: "https://www.mbskills.tn/courses/web-development",
-    },
-    // OTHER COURSES ----------------------------
-    {
-      title:
-        language === "fr"
-          ? "DÉVELOPPEMENT D'APPLICATIONS MOBILES"
-          : language === "en"
-          ? "MOBILE APPLICATION DEVELOPMENT"
-          : "تطوير تطبيقات الجوال",
-      description:
-        language === "fr"
-          ? "Apprenez à créer des applications mobiles natives et multiplateformes avec React Native et Flutter."
-          : language === "en"
-          ? "Learn to create native and cross-platform mobile applications with React Native and Flutter."
-          : "تعلم كيفية إنشاء تطبيقات جوال أصلية ومتعددة المنصات باستخدام React Native و Flutter.",
-      image: "https://i.ibb.co/C5xM7MPx/2.png",
-      tags: ["React Native", "Flutter", "iOS", "Android"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "DATA SCIENCE ET INTELLIGENCE ARTIFICIELLE"
-          : language === "en"
-          ? "DATA SCIENCE AND ARTIFICIAL INTELLIGENCE"
-          : "علم البيانات والذكاء الاصطناعي",
-      description:
-        language === "fr"
-          ? "Maîtrisez l'analyse de données, le machine learning et le deep learning avec Python et TensorFlow."
-          : language === "en"
-          ? "Master data analysis, machine learning and deep learning with Python and TensorFlow."
-          : "أتقن تحليل البيانات والتعلم الآلي والتعلم العميق باستخدام Python و TensorFlow.",
-      image: "https://i.ibb.co/h1M0XzSj/3.png",
-      tags: ["Python", "TensorFlow", "Machine Learning", "Data Analysis"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "DÉVELOPPEMENT LOGICIEL ET INGÉNIERIE"
-          : language === "en"
-          ? "SOFTWARE DEVELOPMENT AND ENGINEERING"
-          : "تطوير البرمجيات والهندسة",
-      description:
-        language === "fr"
-          ? "Apprenez les principes de l'ingénierie logicielle, la conception d'architecture et la gestion de projet."
-          : language === "en"
-          ? "Learn software engineering principles, architecture design and project management."
-          : "تعلم مبادئ هندسة البرمجيات وتصميم البنية وإدارة المشاريع.",
-      image: "https://i.ibb.co/WNbVhYPG/202512112151-2.gif",
-      tags: ["Software Architecture", "Agile", "DevOps", "Testing"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "COMPÉTENCES NUMÉRIQUES ET TRANSFORMATION DIGITALE"
-          : language === "en"
-          ? "DIGITAL SKILLS AND DIGITAL TRANSFORMATION"
-          : "المهارات الرقمية والتحول الرقمي",
-      description:
-        language === "fr"
-          ? "Développez vos compétences numériques pour réussir dans l'économie moderne."
-          : language === "en"
-          ? "Develop your digital skills to succeed in the modern economy."
-          : "طور مهاراتك الرقمية للنجاح في الاقتصاد الحديث.",
-      image: "https://i.ibb.co/ds8KrndC/4.png",
-      tags: ["Digital Marketing", "SEO", "Social Media", "E-commerce"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "CYBERSÉCURITÉ ET SÉCURITÉ DES RÉSEAUX"
-          : language === "en"
-          ? "CYBERSECURITY AND NETWORK SECURITY"
-          : "الأمن السيبراني وأمن الشبكات",
-      description:
-        language === "fr"
-          ? "Apprenez à protéger les systèmes, les réseaux et les données contre les menaces numériques."
-          : language === "en"
-          ? "Learn to protect systems, networks and data from digital threats."
-          : "تعلم كيفية حماية الأنظمة والشبكات والبيانات من التهديدات الرقمية.",
-      image: "https://i.ibb.co/wZRsW0wJ/5.png",
-      tags: ["Network Security", "Ethical Hacking", "Cryptography", "Risk Management"],
-    },
-    // ADDITIONAL COURSES -----------------------------
-    {
-      title:
-        language === "fr"
-          ? "UI/UX DESIGN ET EXPÉRIENCE UTILISATEUR"
-          : language === "en"
-          ? "UI/UX DESIGN AND USER EXPERIENCE"
-          : "تصميم واجهة وتجربة المستخدم",
-      description:
-        language === "fr"
-          ? "Créez des interfaces utilisateur attrayantes et des expériences utilisateur optimales."
-          : language === "en"
-          ? "Create attractive user interfaces and optimal user experiences."
-          : "إنشاء واجهات مستخدم جذابة وتجارب مستخدم مثالية.",
-      image: "https://i.ibb.co/hJVdx8Dk/Screenshot-2025-12-13-at-1-42-32-AM.png",
-      tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "BLOCKCHAIN ET DÉVELOPPEMENT WEB3"
-          : language === "en"
-          ? "BLOCKCHAIN AND WEB3 DEVELOPMENT"
-          : "بلوك تشين وتطوير Web3",
-      description:
-        language === "fr"
-          ? "Apprenez à construire des applications décentralisées et à utiliser les technologies blockchain."
-          : language === "en"
-          ? "Learn to build decentralized applications and use blockchain technologies."
-          : "تعلم كيفية بناء تطبيقات لامركزية و استخدام تقنيات blockchain.",
-      image: "https://i.ibb.co/2YLSRMYY/1.png",
-      tags: ["Smart Contracts", "Solidity", "DeFi", "NFTs"],
-    },
-  ];
-
-  const marqueeCourses = [...coursesData, ...coursesData];
-
-  return (
-    <section className="py-24 relative bg-white overflow-hidden">
-      {/* Inline Styles for the Marquee Animation */}
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .marquee-track {
-          display: flex;
-          width: fit-content;
-          animation: marquee 75s linear infinite;
-        }
-        .marquee-container:hover .marquee-track {
-          animation-play-state: paused;
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight"
-            style={{
-              background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            {language === 'fr' ? 'Nos Formations' :
-             language === 'en' ? 'Our Training Programs' :
-             'برامجنا التدريبية'}
-          </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
-            {language === 'fr' ? "Découvrez nos programmes de formation spécialisés dans les technologies de l'information." :
-             language === 'en' ? "Discover our specialized training programs in information technology." :
-             "اكتشف برامجنا التدريبية المتخصصة في تكنولوجيا المعلومات."}
-          </p>
-        </motion.div>
-      </div>
-
-      <div 
-        className="marquee-container relative w-full"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
-        }}
-      >
-        <div className="marquee-track flex gap-8 py-8 px-4">
-          {marqueeCourses.map((course, index) => (
-            <div
-              key={`${index}-${course.title}`}
-              className="flex-shrink-0 w-[350px] md:w-[400px] group"
-            >
-              <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                <div className="h-56 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors z-10" />
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-start mb-3">
-                     <h3 
-                      className="text-xl font-bold text-gray-900 leading-snug transition-colors line-clamp-1 group-hover:text-[var(--hover-color)]"
-                      style={{ 
-                        ['--hover-color' as any]: secondaryColor 
-                      }}
-                     >
-                      {course.title}
-                    </h3>
-                  </div>
-                  
-                  <p className="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
-                    {course.description}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                    <div className="flex flex-wrap gap-2">
-                      {course.tags.slice(0, 2).map((tag, i) => (
-                        <span
-                          key={i}
-                          className="text-[11px] font-semibold px-2.5 py-1 rounded-md tracking-wide uppercase"
-                          style={{
-                            backgroundColor: '#f0f9ff',
-                            color: secondaryColor,
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Only show button for WEB DEVELOPMENT COURSE */}
-                    {course.title === "DÉVELOPPEMENT WEB FULL STACK" && (
-                      <a
-                        href={course.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50 hover:text-white transition-all duration-300"
-                        style={{ 
-                          color: '#1f2937' 
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = secondaryColor;
-                          e.currentTarget.style.color = 'white';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#f9fafb';
-                          e.currentTarget.style.color = '#1f2937';
-                        }}
-                        aria-label="Voir la formation"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+export const translations = {
+  // Hero Section
+  heroSubtitle: {
+    fr: "Formations professionnelles en technologies de l'information pour développer vos compétences et accélérer votre carrière.",
+    en: "Professional training in information technology to develop your skills and accelerate your career.",
+    ar: "تدريب احترافي في تكنولوجيا المعلومات لتطوير مهاراتك وتسريع مسيرتك المهنية."
+  },
+  heroButton: {
+    fr: "Découvrir nos formations",
+    en: "Discover our training programs",
+    ar: "اكتشف برامجنا التدريبية"
+  },
+  
+  // About Section
+  aboutTitle: {
+    fr: "À propos de MBSkills",
+    en: "About MBSkills",
+    ar: "حول MBSkills"
+  },
+  aboutText: {
+    fr: "MBSkills est un centre de formation professionnelle spécialisé dans les technologies de l'information et du numérique. Notre mission est de fournir des formations de haute qualité qui répondent aux besoins du marché de l'emploi, en mettant l'accent sur les compétences pratiques, les certifications reconnues et l'employabilité.",
+    en: "MBSkills is a professional training center specializing in information and digital technologies. Our mission is to provide high-quality training that meets the needs of the job market, focusing on practical skills, recognized certifications, and employability.",
+    ar: "MBSkills هو مركز تدريب مهني متخصص في تكنولوجيا المعلومات والرقمنة. مهمتنا هي توفير تدريب عالي الجودة يلبي احتياجات سوق العمل، مع التركيز على المهارات العملية والشهادات المعترف بها وقابلية التوظيف."
+  },
+  
+  // Services Section
+  servicesTitle: {
+    fr: "Nos formations",
+    en: "Our training programs",
+    ar: "برامجنا التدريبية"
+  },
+  webDevelopmentTitle: {
+    fr: "Développement Web",
+    en: "Web Development",
+    ar: "تطوير الويب"
+  },
+  webDevelopmentDesc: {
+    fr: "Apprenez à créer des sites web modernes et réactifs avec les dernières technologies front-end et back-end.",
+    en: "Learn to create modern and responsive websites with the latest front-end and back-end technologies.",
+    ar: "تعلم إنشاء مواقع ويب حديثة وسريعة الاستجابة بأحدث تقنيات الواجهة الأمامية والخلفية."
+  },
+  mobileDevelopmentTitle: {
+    fr: "Développement Mobile",
+    en: "Mobile Development",
+    ar: "تطوير الجوال"
+  },
+  mobileDevelopmentDesc: {
+    fr: "Maîtrisez le développement d'applications mobiles natives et multiplateformes pour iOS et Android.",
+    en: "Master native and cross-platform mobile app development for iOS and Android.",
+    ar: "أتقن تطوير تطبيقات الجوال الأصلية والمتعددة المنصات لنظامي iOS و Android."
+  },
+  dataScienceTitle: {
+    fr: "Data Science & IA",
+    en: "Data Science & AI",
+    ar: "علم البيانات والذكاء الاصطناعي"
+  },
+  dataScienceDesc: {
+    fr: "Explorez le monde de l'analyse de données, du machine learning et de l'intelligence artificielle.",
+    en: "Explore the world of data analysis, machine learning, and artificial intelligence.",
+    ar: "استكشف عالم تحليل البيانات والتعلم الآلي والذكاء الاصطناعي."
+  },
+  
+  // Pricing Section
+  pricingTitle: {
+    fr: "Nos tarifs",
+    en: "Our pricing",
+    ar: "أسعارنا"
+  },
+  pricingSubtitle: {
+    fr: "Des programmes de formation adaptés à tous les niveaux et à tous les budgets",
+    en: "Training programs suitable for all levels and budgets",
+    ar: "برامج تدريبية مناسبة لجميع المستويات والميزانيات"
+  },
+  basicPlan: {
+    fr: "Formation Initiation",
+    en: "Beginner Training",
+    ar: "تدريب للمبتدئين"
+  },
+  professionalPlan: {
+    fr: "Formation Professionnelle",
+    en: "Professional Training",
+    ar: "تدريب احترافي"
+  },
+  enterprisePlan: {
+    fr: "Formation Expert",
+    en: "Expert Training",
+    ar: "تدريب الخبراء"
+  },
+  startingFrom: {
+    fr: "À partir de",
+    en: "Starting from",
+    ar: "بدءاً من"
+  },
+  webDevelopmentBasics: {
+    fr: "Bases du développement web",
+    en: "Web development basics",
+    ar: "أساسيات تطوير الويب"
+  },
+  basicCertification: {
+    fr: "Certification de base",
+    en: "Basic certification",
+    ar: "شهادة أساسية"
+  },
+  threeMonthsTraining: {
+    fr: "Formation de 3 mois",
+    en: "3-month training",
+    ar: "تدريب لمدة 3 أشهر"
+  },
+  fullStackDevelopment: {
+    fr: "Développement full-stack",
+    en: "Full-stack development",
+    ar: "تطوير شامل"
+  },
+  advancedCertification: {
+    fr: "Certification avancée",
+    en: "Advanced certification",
+    ar: "شهادة متقدمة"
+  },
+  sixMonthsTraining: {
+    fr: "Formation de 6 mois",
+    en: "6-month training",
+    ar: "تدريب لمدة 6 أشهر"
+  },
+  jobPlacementAssistance: {
+    fr: "Aide à la recherche d'emploi",
+    en: "Job placement assistance",
+    ar: "مساعدة في البحث عن عمل"
+  },
+  specializedTraining: {
+    fr: "Formation spécialisée",
+    en: "Specialized training",
+    ar: "تدريب متخصص"
+  },
+  expertCertification: {
+    fr: "Certification d'expert",
+    en: "Expert certification",
+    ar: "شهادة خبير"
+  },
+  twelveMonthsTraining: {
+    fr: "Formation de 12 mois",
+    en: "12-month training",
+    ar: "تدريب لمدة 12 شهرًا"
+  },
+  guaranteedInternship: {
+    fr: "Stage garanti",
+    en: "Guaranteed internship",
+    ar: "تدريب مضمون"
+  },
+  contactUs: {
+    fr: "Nous contacter",
+    en: "Contact us",
+    ar: "اتصل بنا"
+  },
+  popular: {
+    fr: "Populaire",
+    en: "Popular",
+    ar: "شائع"
+  },
+  
+  // Tech Stack Section
+  techStackTitle: {
+    fr: "Technologies enseignées",
+    en: "Technologies taught",
+    ar: "التقنيات المدرسة"
+  },
+  techStackSubtitle: {
+    fr: "Apprenez les technologies les plus demandées sur le marché de l'emploi",
+    en: "Learn the most in-demand technologies in the job market",
+    ar: "تعلم التقنيات الأكثر طلبًا في سوق العمل"
+  },
+  techReactNextjs: {
+    fr: "React & Next.js",
+    en: "React & Next.js",
+    ar: "React و Next.js"
+  },
+  techNodeExpress: {
+    fr: "Node.js & Express",
+    en: "Node.js & Express",
+    ar: "Node.js و Express"
+  },
+  techAwsFirebase: {
+    fr: "AWS & Firebase",
+    en: "AWS & Firebase",
+    ar: "AWS و Firebase"
+  },
+  techUiUxDesign: {
+    fr: "UI/UX Design",
+    en: "UI/UX Design",
+    ar: "تصميم واجهة وتجربة المستخدم"
+  },
+  techReactNative: {
+    fr: "React Native",
+    en: "React Native",
+    ar: "React Native"
+  },
+  techWeb3Ai: {
+    fr: "Web3 & IA",
+    en: "Web3 & AI",
+    ar: "Web3 والذكاء الاصطناعي"
+  },
+  
+  // Testimonials Section
+  testimonialsTitle: {
+    fr: "Témoignages de nos étudiants",
+    en: "Testimonials from our students",
+    ar: "شهادات من طلابنا"
+  },
+  testimonialItems: {
+    fr: [
+      {
+        name: "Sarah Ben Ali",
+        business: "Développeuse Full Stack",
+        rating: 5,
+        review: "Grâce à la formation chez MBSkills, j'ai pu acquérir les compétences nécessaires pour trouver un emploi rapidement. Les formateurs sont excellents et le programme est très complet."
+      },
+      {
+        name: "Mohamed Trabelsi",
+        business: "Data Scientist",
+        rating: 5,
+        review: "La formation en Data Science m'a ouvert de nouvelles perspectives de carrière. J'ai particulièrement apprécié l'approche pratique et les projets concrets."
+      },
+      {
+        name: "Leila Karray",
+        business: "Développeuse Mobile",
+        rating: 5,
+        review: "Je recommande vivement MBSkills à tous ceux qui souhaitent se reconvertir dans le numérique. L'accompagnement est personnalisé et les certifications reconnues."
+      }
+    ],
+    en: [
+      {
+        name: "Sarah Ben Ali",
+        business: "Full Stack Developer",
+        rating: 5,
+        review: "Thanks to the training at MBSkills, I was able to acquire the necessary skills to find a job quickly. The instructors are excellent and the program is very comprehensive."
+      },
+      {
+        name: "Mohamed Trabelsi",
+        business: "Data Scientist",
+        rating: 5,
+        review: "The Data Science training opened up new career prospects for me. I particularly appreciated the practical approach and the concrete projects."
+      },
+      {
+        name: "Leila Karray",
+        business: "Mobile Developer",
+        rating: 5,
+        review: "I highly recommend MBSkills to anyone looking to retrain in digital. The support is personalized and the certifications are recognized."
+      }
+    ],
+    ar: [
+      {
+        name: "سارة بن علي",
+        business: "مطورة Full Stack",
+        rating: 5,
+        review: "بفضل التدريب في MBSkills، تمكنت من اكتساب المهارات اللازمة للعثور على عمل بسرعة. المدربون ممتازون والبرنامج شامل للغاية."
+      },
+      {
+        name: "محمد الطرابلسي",
+        business: "عالم بيانات",
+        rating: 5,
+        review: "فتح تدريب علم البيانات آفاقًا جديدة لمسيرتي المهنية. لقد استمتعت بشكل خاص بالنهج العملي والمشاريع الملموسة."
+      },
+      {
+        name: "ليلى قرعة",
+        business: "مطورة تطبيقات الجوال",
+        rating: 5,
+        review: "أوصي بشدة بـ MBSkills لكل من يرغب في إعادة التدريب في المجال الرقمي. الدعم مخصص والشهادات معترف بها."
+      }
+    ]
+  },
+  
+  // FAQ Section
+  faqTitle: {
+    fr: "Questions fréquentes",
+    en: "Frequently Asked Questions",
+    ar: "الأسئلة المتكررة"
+  },
+  
+  // Footer Section
+  footerDesc: {
+    fr: "Centre de formation professionnelle spécialisé en technologies de l'information et du numérique. Formations certifiantes pour une carrière dans le secteur technologique.",
+    en: "Professional training center specializing in information and digital technologies. Certified training for a career in the technology sector.",
+    ar: "مركز تدريب مهني متخصص في تكنولوجيا المعلومات والرقمنة. تدريب معتمد لمسيرة مهنية في قطاع التكنولوجيا."
+  },
+  contactInfo: {
+    fr: "Informations de contact",
+    en: "Contact Information",
+    ar: "معلومات الاتصال"
+  },
+  connectWith: {
+    fr: "Suivez-nous",
+    en: "Follow Us",
+    ar: "تابعنا"
+  },
+  followUs: {
+    fr: "Rejoignez notre communauté pour rester informé de nos dernières formations et actualités.",
+    en: "Join our community to stay informed about our latest training and news.",
+    ar: "انضم إلى مجتمعنا لتبقى على اطلاع بأحدث تدريباتنا وأخبارنا."
+  },
+  copyright: {
+    fr: `© ${new Date().getFullYear()} MBSkills. Tous droits réservés.`,
+    en: `© ${new Date().getFullYear()} MBSkills. All rights reserved.`,
+    ar: `© ${new Date().getFullYear()} MBSkills. جميع الحقوق محفوظة.`
+  },
+  
+  // Animation Section
+  modernTechnologies: {
+    fr: "Technologies Modernes",
+    en: "Modern Technologies",
+    ar: "التقنيات الحديثة"
+  },
+  practicalSkills: {
+    fr: "Compétences Pratiques",
+    en: "Practical Skills",
+    ar: "المهارات العملية"
+  },
+  careerOpportunities: {
+    fr: "Opportunités de Carrière",
+    en: "Career Opportunities",
+    ar: "فرص العمل"
+  }
 };
 
-export default ProjectsSection;
+// Export as default
+export default translations;

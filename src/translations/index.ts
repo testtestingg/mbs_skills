@@ -321,3 +321,6 @@ export const translations = {
     ar: "فرص العمل"
   }
 };
+
+// Export as default
+export default translations;

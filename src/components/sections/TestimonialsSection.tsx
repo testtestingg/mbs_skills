@@ -1,4 +1,4 @@
-// TestimonialsSection.tsx (Updated with correct color scheme)
+// TestimonialsSection.tsx (Updated for MBSkills)
 import React, { memo, useRef, useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,7 +11,8 @@ interface TestimonialsSectionProps {
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = memo(({ language, t }) => {
   const testimonialsData = t('testimonialItems');
-  const customPurple = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -39,7 +40,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = memo(({ language
     <motion.section 
       ref={sectionRef}
       id="testimonials" 
-      aria-label="Testimonials"
+      aria-label="Témoignages"
       className="py-24 relative bg-white"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +51,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = memo(({ language
         <motion.h2 
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 text-gradient pb-2"
           style={{ 
-            background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+            background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
@@ -75,13 +76,13 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = memo(({ language
             >
               <div className="flex mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5" style={{ color: customPurple }} fill="currentColor" />
+                  <Star key={i} className="h-5 w-5" style={{ color: secondaryColor }} fill="currentColor" />
                 ))}
               </div>
               <p className="text-gray-600 mb-4 italic">"{testimonial.review}"</p>
               <div>
                 <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                <p className="text-sm" style={{ color: customPurple }}>{testimonial.business}</p>
+                <p className="text-sm" style={{ color: primaryColor }}>{testimonial.business}</p>
               </div>
             </motion.div>
           ))}

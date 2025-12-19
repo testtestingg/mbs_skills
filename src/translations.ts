@@ -1,6 +1,7 @@
-// translations.js (Updated for MBSkills)
+// src/translations.ts (Updated for MBSkills)
 
-export const translations = {
+// First declare the translations object
+const translations = {
   // Hero Section
   heroSubtitle: {
     fr: "Formations professionnelles en technologies de l'information pour développer vos compétences et accélérer votre carrière.",
@@ -321,3 +322,7 @@ export const translations = {
     ar: "فرص العمل"
   }
 };
+
+// Export both named and default exports
+export { translations };
+export default translations;

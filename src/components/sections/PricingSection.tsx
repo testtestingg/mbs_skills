@@ -1,4 +1,4 @@
-// PricingSection.tsx (Updated with correct color scheme)
+// PricingSection.tsx (Updated for MBSkills)
 import React, { memo, useRef, useEffect, useState, useCallback } from 'react';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,7 +11,8 @@ interface PricingSectionProps {
 }
 
 const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handleContactOpen }) => {
-  const customPurple = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -43,7 +44,7 @@ const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handl
     <motion.section 
       ref={sectionRef}
       id="pricing" 
-      aria-label="Pricing"
+      aria-label="Tarifs"
       className="py-24 relative bg-white"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +62,7 @@ const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handl
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gradient pb-2"
             style={{ 
-              background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+              background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
@@ -84,29 +85,32 @@ const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handl
             viewport={{ once: true }}
           >
             <div className="p-8 h-full flex flex-col">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('basicPlan')}</h3>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: primaryColor }}>{t('basicPlan')}</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">200</span>
+                <span className="text-4xl font-bold text-gray-900">1200</span>
                 <span className="text-gray-600"> TND</span>
               </div>
               <p className="text-gray-600 mb-6">{t('startingFrom')}</p>
               <ul className="text-gray-600 mb-8 space-y-2 flex-grow">
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('responsiveWebsite')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('webDevelopmentBasics')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('basicSEO')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('basicCertification')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('oneYearSupport')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('threeMonthsTraining')}
                 </li>
               </ul>
               <button 
                 onClick={handleContactClick}
-                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`
+                }}
               >
                 {t('contactUs')}
               </button>
@@ -123,37 +127,43 @@ const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handl
           >
             <div className="p-8 h-full flex flex-col">
               <div 
-                className="text-sm font-bold px-3 py-1 rounded-full inline-block mb-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white"
+                className="text-sm font-bold px-3 py-1 rounded-full inline-block mb-4 text-white"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`
+                }}
               >
                 {t('popular')}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('professionalPlan')}</h3>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: primaryColor }}>{t('professionalPlan')}</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">800</span>
+                <span className="text-4xl font-bold text-gray-900">2500</span>
                 <span className="text-gray-600"> TND</span>
               </div>
               <p className="text-gray-600 mb-6">{t('startingFrom')}</p>
               <ul className="text-gray-600 mb-8 space-y-2 flex-grow">
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('advancedWebsite')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('fullStackDevelopment')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('premiumSEO')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('advancedCertification')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('twoYearsSupport')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('sixMonthsTraining')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('contentManagement')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('jobPlacementAssistance')}
                 </li>
               </ul>
               <button 
                 onClick={handleContactClick}
-                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`
+                }}
               >
                 {t('contactUs')}
               </button>
@@ -169,33 +179,36 @@ const PricingSection: React.FC<PricingSectionProps> = memo(({ language, t, handl
             viewport={{ once: true }}
           >
             <div className="p-8 h-full flex flex-col">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('enterprisePlan')}</h3>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: primaryColor }}>{t('enterprisePlan')}</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">1500+</span>
+                <span className="text-4xl font-bold text-gray-900">4000+</span>
                 <span className="text-gray-600"> TND</span>
               </div>
               <p className="text-gray-600 mb-6">{t('startingFrom')}</p>
               <ul className="text-gray-600 mb-8 space-y-2 flex-grow">
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('customSolution')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('specializedTraining')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('advancedSEO')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('expertCertification')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('lifetimeSupport')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('twelveMonthsTraining')}
                 </li>
                 <li className="flex items-center">
-                  <span className="mr-2" style={{ color: customPurple }}>✓</span>
-                  {t('mobileApp')}
+                  <span className="mr-2" style={{ color: secondaryColor }}>✓</span>
+                  {t('guaranteedInternship')}
                 </li>
               </ul>
               <button 
                 onClick={handleContactClick}
-                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                className="mt-auto text-white px-6 py-3 rounded-full transition-colors w-full"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`
+                }}
               >
                 {t('contactUs')}
               </button>

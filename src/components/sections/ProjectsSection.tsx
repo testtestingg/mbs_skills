@@ -95,6 +95,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
         language === "fr"
           ? "Développez vos compétences numériques pour réussir dans l'économie moderne."
           : language === "en"
+          ? "Develop your digital skills to succeed in the modern economy."
           : "طور مهاراتك الرقمية للنجاح في الاقتصاد الحديث.",
       image: "https://i.ibb.co/ds8KrndC/4.png",
       tags: ["Digital Marketing", "SEO", "Social Media", "E-commerce"],
@@ -110,6 +111,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
         language === "fr"
           ? "Apprenez à protéger les systèmes, les réseaux et les données contre les menaces numériques."
           : language === "en"
+          ? "Learn to protect systems, networks and data from digital threats."
           : "تعلم كيفية حماية الأنظمة والشبكات والبيانات من التهديدات الرقمية.",
       image: "https://i.ibb.co/wZRsW0wJ/5.png",
       tags: ["Network Security", "Ethical Hacking", "Cryptography", "Risk Management"],
@@ -120,11 +122,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
         language === "fr"
           ? "UI/UX DESIGN ET EXPÉRIENCE UTILISATEUR"
           : language === "en"
+          ? "UI/UX DESIGN AND USER EXPERIENCE"
           : "تصميم واجهة وتجربة المستخدم",
       description:
         language === "fr"
           ? "Créez des interfaces utilisateur attrayantes et des expériences utilisateur optimales."
           : language === "en"
+          ? "Create attractive user interfaces and optimal user experiences."
           : "إنشاء واجهات مستخدم جذابة وتجارب مستخدم مثالية.",
       image: "https://i.ibb.co/hJVdx8Dk/Screenshot-2025-12-13-at-1-42-32-AM.png",
       tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
@@ -134,9 +138,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
         language === "fr"
           ? "BLOCKCHAIN ET DÉVELOPPEMENT WEB3"
           : language === "en"
+          ? "BLOCKCHAIN AND WEB3 DEVELOPMENT"
           : "بلوك تشين وتطوير Web3",
       description:
         language === "fr"
+          ? "Apprenez à construire des applications décentralisées et à utiliser les technologies blockchain."
+          : language === "en"
+          ? "Learn to build decentralized applications and use blockchain technologies."
           : "تعلم كيفية بناء تطبيقات لامركزية و استخدام تقنيات blockchain.",
       image: "https://i.ibb.co/2YLSRMYY/1.png",
       tags: ["Smart Contracts", "Solidity", "DeFi", "NFTs"],
@@ -247,7 +255,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                       ))}
                     </div>
 
-                    {/* Only show the button for the WEB DEVELOPMENT COURSE */}
+                    {/* Only show button for WEB DEVELOPMENT COURSE */}
                     {course.title === "DÉVELOPPEMENT WEB FULL STACK" && (
                       <a
                         href={course.link}

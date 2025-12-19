@@ -1,4 +1,4 @@
-// AnimatedHero.tsx (Updated with correct color scheme)
+// AnimatedHero.tsx (Updated for MBSkills)
 import React, { Suspense, lazy, useRef, useEffect, useState, useCallback, memo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -30,8 +30,8 @@ export function SplineScene({ scene, className, onLoad }: SplineSceneProps) {
       fallback={
         <div className="w-full h-full flex items-center justify-center bg-white">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <span className="text-gray-600 text-sm">Loading 3D experience...</span>
+            <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <span className="text-gray-600 text-sm">Chargement de l'expérience 3D...</span>
           </div>
         </div>
       }
@@ -54,7 +54,8 @@ interface AnimatedHeroProps {
 }
 
 const AnimatedHero: React.FC<AnimatedHeroProps> = memo(({ handleContactOpen, language, t }) => {
-  const customColor = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
   const containerRef = useRef<HTMLDivElement>(null);
   const [splineLoaded, setSplineLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -131,14 +132,14 @@ const AnimatedHero: React.FC<AnimatedHeroProps> = memo(({ handleContactOpen, lan
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">
               <span className="block text-gray-900">
-                {language === 'fr' ? 'Élevez Votre Marque.' : 
-                 language === 'en' ? 'Elevate Your Brand.' : 
-                 'ارفع علامتك التجارية.'}
+                {language === 'fr' ? 'Développez Vos Compétences.' : 
+                 language === 'en' ? 'Develop Your Skills.' : 
+                 'طور مهاراتك.'}
               </span>
-              <span className="block" style={{ color: customColor }}>
-                {language === 'fr' ? 'Maîtrisez l\'Avenir Numérique.' : 
-                 language === 'en' ? 'Master the Digital Future.' : 
-                 'أتقن المستقبل الرقمي.'}
+              <span className="block" style={{ color: primaryColor }}>
+                {language === 'fr' ? 'Maîtrisez les Technologies du Futur.' : 
+                 language === 'en' ? 'Master Future Technologies.' : 
+                 'أتقن تقنيات المستقبل.'}
               </span>
             </h1>
           </motion.div>
@@ -160,7 +161,11 @@ const AnimatedHero: React.FC<AnimatedHeroProps> = memo(({ handleContactOpen, lan
           >
             <button
               onClick={handleContactOpen}
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg hover:shadow-md transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 rounded-lg hover:shadow-md transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                focusRingColor: secondaryColor
+              }}
             >
               <span className="mr-2">{t('heroButton')}</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

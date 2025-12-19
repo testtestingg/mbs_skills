@@ -1,4 +1,4 @@
-// AboutSection.tsx (Updated with correct color scheme)
+// AboutSection.tsx (Updated for MBSkills)
 import React, { memo, useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../../types';
@@ -9,7 +9,8 @@ interface AboutSectionProps {
 }
 
 const AboutSection: React.FC<AboutSectionProps> = memo(({ language, t }) => {
-  const customPurple = '#682cda';
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -37,7 +38,7 @@ const AboutSection: React.FC<AboutSectionProps> = memo(({ language, t }) => {
     <motion.section 
       ref={sectionRef}
       id="about" 
-      aria-label="About TechyTak"
+      aria-label="À propos de MBSkills"
       className="py-24 relative bg-white"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +49,7 @@ const AboutSection: React.FC<AboutSectionProps> = memo(({ language, t }) => {
         <motion.h2 
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-gradient pb-2"
           style={{ 
-            background: `linear-gradient(135deg, #682cda 0%, #9333ea 100%)`,
+            background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'

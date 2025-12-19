@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {  
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background: #000000;
+    color: #ffffff;
+    line-height: 1.6; /* Consistent line height for vertical space */
+    text-rendering: optimizeLegibility; /* Improves font rendering */
+    -webkit-font-smoothing: antialiased; /* Better font smoothing for WebKit browsers */
+    -moz-osx-font-smoothing: grayscale; /* Better font smoothing for Firefox on macOS */
+    padding-top: 1.5rem; /* Increased to prevent top clipping */
+    overflow: visible; /* Prevent body-level clipping */
+    clip-path: none; /* Ensure no clipping path affects text */
+  }
+}
+
+@layer utilities {
+  /* Utility to fix text cutoff in containers, especially at the top */
+  .text-container {
+    padding: 1.5rem 0.5rem 0.5rem 0.5rem; /* Increased top padding */
+    line-height: 1.7; /* Consistent for more vertical space */
+    overflow: visible; /* Prevent clipping */
+    position: relative; /* Ensure no parent clipping affects this */
+    margin-top: 0; /* Prevent negative margins from pulling text up */
+    clip-path: none; /* Ensure no clipping path affects text */
+  }
+
+  /* Additional utility for text elements to ensure no top clipping */
+  .text-safe {
+    padding-top: 1.5rem; /* Extra top padding for safety */
+    line-height: 1.7;
+    box-sizing: content-box; /* Prevent box-sizing from reducing available space */
+    overflow: visible;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px); /* Further reduced to prevent text pushing too far up */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+}
+
+/* Language Ripple Effect */
+.language-ripple {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+  z-index: 35;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #7c3aed, #5b21b6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #6d28d9, #4c1d95);
+}
+
+/* Smooth transitions for all interactive elements */
+button, a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1rem 1rem; /* Increased top padding further */
+  line-height: 1.6; /* Consistent for better text spacing */
+}
+
+/* Enhanced backdrop blur support */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Glow effects */
+.glow-violet {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+}
+
+.glow-violet:hover {
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.8);
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+}
+
+/* Cinematic scroll effects */
+.parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+}
+
+.rtl .space-x-1 > * + * {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+.rtl .space-x-2 > * + * {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.rtl .space-x-4 > * + * {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+.rtl .space-x-8 > * + * {
+  margin-left: 0;
+  margin-right: 2rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .animate-float {
+    animation-duration: 2s;
+  }
+  
+  .language-ripple {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Ensure text is not clipped on mobile */
+  .text-container {
+    padding: 2rem 0.75rem 0.75rem 0.75rem; /* Increased top padding for mobile */
+    line-height: 1.8; /* Further increased for mobile */
+  }
+
+  .text-safe {
+    padding-top: 2rem; /* Extra top padding for mobile */
+    line-height: 1.8;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .border-violet-500\/20 {
+    border-color: rgba(124, 58, 237, 0.8);
+  }
+  
+  .text-gray-300 {
+    color: #e5e7eb;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-fade-in,
+  .animate-fade-in-up {
+    animation: none;
+  }
+  
+  .transition-all {
+    transition: none;
+  }
+}

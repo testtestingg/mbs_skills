@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../../types';
 
-interface Project {
+interface Course {
   title: string;
   description: string;
   image: string;
@@ -21,133 +21,129 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
   const primaryColor = '#122138';
   const secondaryColor = '#04a3fe';
 
-  const projectsData: Project[] = [
-    // WEB DEVELOPMENT PROJECT
+  const coursesData: Course[] = [
+    // WEB DEVELOPMENT COURSE
     {
-      title: "PORTFOLIO WEB DÉVELOPPEUR",
+      title: "DÉVELOPPEMENT WEB FULL STACK",
       description:
         language === "fr"
-          ? "Projet final de formation en développement web, utilisant HTML5, CSS3 et JavaScript moderne."
+          ? "Formation complète en développement web front-end et back-end avec HTML5, CSS3, JavaScript, React et Node.js."
           : language === "en"
-          ? "Final project of web development training, using HTML5, CSS3 and modern JavaScript."
-          : "مشروع نهائي لتدريب تطوير الويب، باستخدام HTML5 و CSS3 و JavaScript الحديث.",
+          ? "Complete training in front-end and back-end web development with HTML5, CSS3, JavaScript, React and Node.js."
+          : "تدريب شامل في تطوير الواجهة الأمامية والخلفية للويب باستخدام HTML5 و CSS3 و JavaScript و React و Node.js.",
       image: "https://i.ibb.co/353PrMdM/Screen-Recording2025-12-14at1-56-35-PM-ezgif-com-video-to-gif-converter.gif",
-      tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-      link: "https://www.mbskills.tn/projects/web-portfolio",
+      tags: ["HTML5", "CSS3", "JavaScript", "React", "Node.js"],
+      link: "https://www.mbskills.tn/courses/web-development",
     },
-    // REAL PROJECTS ----------------------------
+    // OTHER COURSES ----------------------------
     {
       title:
         language === "fr"
-          ? "Application E-commerce"
+          ? "DÉVELOPPEMENT D'APPLICATIONS MOBILES"
           : language === "en"
-          ? "E-commerce Application"
-          : "تطبيق التجارة الإلكترونية",
+          ? "MOBILE APPLICATION DEVELOPMENT"
+          : "تطوير تطبيقات الجوال",
       description:
         language === "fr"
-          ? "Plateforme de vente en ligne complète avec panier d'achat et système de paiement."
+          ? "Apprenez à créer des applications mobiles natives et multiplateformes avec React Native et Flutter."
           : language === "en"
-          ? "Complete online sales platform with shopping cart and payment system."
-          : "منصة مبيعات عبر الإنترنت كاملة مع سلة تسوق ونظام دفع.",
+          ? "Learn to create native and cross-platform mobile applications with React Native and Flutter."
+          : "تعلم كيفية إنشاء تطبيقات جوال أصلية ومتعددة المنصات باستخدام React Native و Flutter.",
       image: "https://i.ibb.co/C5xM7MPx/2.png",
-      tags: ["React", "Node.js", "MongoDB"],
+      tags: ["React Native", "Flutter", "iOS", "Android"],
     },
     {
       title:
         language === "fr"
-          ? "Tableau de Bord Analytique"
+          ? "DATA SCIENCE ET INTELLIGENCE ARTIFICIELLE"
           : language === "en"
-          ? "Analytics Dashboard"
-          : "لوحة تحليلية",
+          ? "DATA SCIENCE AND ARTIFICIAL INTELLIGENCE"
+          : "علم البيانات والذكاء الاصطناعي",
       description:
         language === "fr"
-          ? "Interface de visualisation de données pour l'analyse des performances commerciales."
+          ? "Maîtrisez l'analyse de données, le machine learning et le deep learning avec Python et TensorFlow."
           : language === "en"
-          ? "Data visualization interface for business performance analysis."
-          : "واجهة تصور البيانات لتحليل أداء الأعمال.",
+          ? "Master data analysis, machine learning and deep learning with Python and TensorFlow."
+          : "أتقن تحليل البيانات والتعلم الآلي والتعلم العميق باستخدام Python و TensorFlow.",
       image: "https://i.ibb.co/h1M0XzSj/3.png",
-      tags: ["React", "D3.js", "Python"],
+      tags: ["Python", "TensorFlow", "Machine Learning", "Data Analysis"],
     },
     {
       title:
         language === "fr"
-          ? "Application Mobile de Fitness"
+          ? "DÉVELOPPEMENT LOGICIEL ET INGÉNIERIE"
           : language === "en"
-          ? "Fitness Mobile App"
-          : "تطبيق لياقة بدنية",
+          ? "SOFTWARE DEVELOPMENT AND ENGINEERING"
+          : "تطوير البرمجيات والهندسة",
       description:
         language === "fr"
-          ? "Application mobile pour suivre les entraînements et la progression physique."
+          ? "Apprenez les principes de l'ingénierie logicielle, la conception d'architecture et la gestion de projet."
           : language === "en"
-          ? "Mobile application to track workouts and physical progress."
-          : "تطبيق جوال لتتبع التدريبات والتقدم البدني.",
+          ? "Learn software engineering principles, architecture design and project management."
+          : "تعلم مبادئ هندسة البرمجيات وتصميم البنية وإدارة المشاريع.",
       image: "https://i.ibb.co/WNbVhYPG/202512112151-2.gif",
-      tags: ["React Native", "Firebase"],
+      tags: ["Software Architecture", "Agile", "DevOps", "Testing"],
     },
     {
       title:
         language === "fr"
-          ? "Plateforme d'Apprentissage en Ligne"
+          ? "COMPÉTENCES NUMÉRIQUES ET TRANSFORMATION DIGITALE"
           : language === "en"
-          ? "Online Learning Platform"
-          : "منصة تعلم عبر الإنترنت",
+          ? "DIGITAL SKILLS AND DIGITAL TRANSFORMATION"
+          : "المهارات الرقمية والتحول الرقمي",
       description:
         language === "fr"
-          ? "Système complet de gestion de cours avec suivi de progression et évaluations."
+          ? "Développez vos compétences numériques pour réussir dans l'économie moderne."
           : language === "en"
-          ? "Complete course management system with progress tracking and assessments."
-          : "نظام إدارة دورات كامل مع تتبع التقدم والتقييمات.",
+          : "طور مهاراتك الرقمية للنجاح في الاقتصاد الحديث.",
       image: "https://i.ibb.co/ds8KrndC/4.png",
-      tags: ["Next.js", "PostgreSQL", "Tailwind CSS"],
+      tags: ["Digital Marketing", "SEO", "Social Media", "E-commerce"],
     },
     {
       title:
         language === "fr"
-          ? "Chatbot avec Intelligence Artificielle"
+          ? "CYBERSÉCURITÉ ET SÉCURITÉ DES RÉSEAUX"
           : language === "en"
-          : "ذكاء اصطناعي",
+          ? "CYBERSECURITY AND NETWORK SECURITY"
+          : "الأمن السيبراني وأمن الشبكات",
       description:
         language === "fr"
-          ? "Chatbot intelligent pour service client avec traitement du langage naturel."
+          ? "Apprenez à protéger les systèmes, les réseaux et les données contre les menaces numériques."
           : language === "en"
-          ? "Intelligent chatbot for customer service with natural language processing."
-          : "روبوت دردشة ذكي لخدمة العملاء مع معالجة اللغة الطبيعية.",
+          : "تعلم كيفية حماية الأنظمة والشبكات والبيانات من التهديدات الرقمية.",
       image: "https://i.ibb.co/wZRsW0wJ/5.png",
-      tags: ["Python", "NLP", "TensorFlow"],
+      tags: ["Network Security", "Ethical Hacking", "Cryptography", "Risk Management"],
     },
-    // FILLER PROJECTS -----------------------------
+    // ADDITIONAL COURSES -----------------------------
     {
       title:
         language === "fr"
-          ? "Application de Gestion de Projet"
+          ? "UI/UX DESIGN ET EXPÉRIENCE UTILISATEUR"
           : language === "en"
-          : "تطبيق إدارة المشروع",
+          : "تصميم واجهة وتجربة المستخدم",
       description:
         language === "fr"
-          ? "Outil collaboratif pour la gestion de tâches et le suivi de projets d'équipe."
+          ? "Créez des interfaces utilisateur attrayantes et des expériences utilisateur optimales."
           : language === "en"
-          : "أداة تعاونية لإدارة المهام وتتبع مشاريع الفريق.",
+          : "إنشاء واجهات مستخدم جذابة وتجارب مستخدم مثالية.",
       image: "https://i.ibb.co/hJVdx8Dk/Screenshot-2025-12-13-at-1-42-32-AM.png",
-      tags: ["Vue.js", "Node.js", "Express"],
+      tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
     },
     {
       title:
         language === "fr"
-          ? "Site Web Restaurant"
+          ? "BLOCKCHAIN ET DÉVELOPPEMENT WEB3"
           : language === "en"
-          : "موقع مطعم",
+          : "بلوك تشين وتطوير Web3",
       description:
         language === "fr"
-          ? "Site web moderne pour restaurant avec système de réservation en ligne."
-          : language === "en"
-          : "Modern restaurant website with online reservation system."
-          : "موقع مطعم حديث مع نظام حجز عبر الإنترنت.",
+          : "تعلم كيفية بناء تطبيقات لامركزية و استخدام تقنيات blockchain.",
       image: "https://i.ibb.co/2YLSRMYY/1.png",
-      tags: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
+      tags: ["Smart Contracts", "Solidity", "DeFi", "NFTs"],
     },
   ];
 
-  const marqueeProjects = [...projectsData, ...projectsData];
+  const marqueeCourses = [...coursesData, ...coursesData];
 
   return (
     <section className="py-24 relative bg-white overflow-hidden">
@@ -184,14 +180,14 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
               backgroundClip: 'text',
             }}
           >
-            {language === 'fr' ? 'Projets des Étudiants' :
-             language === 'en' ? 'Student Projects' :
-             'مشاريع الطلاب'}
+            {language === 'fr' ? 'Nos Formations' :
+             language === 'en' ? 'Our Training Programs' :
+             'برامجنا التدريبية'}
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
-            {language === 'fr' ? "Une sélection de projets réalisés par nos étudiants durant leur formation." :
-             language === 'en' ? "A selection of projects completed by our students during their training." :
-             "مجموعة مختارة من المشاريع التي أكملها طلابنا أثناء تدريبهم."}
+            {language === 'fr' ? "Découvrez nos programmes de formation spécialisés dans les technologies de l'information." :
+             language === 'en' ? "Discover our specialized training programs in information technology." :
+             "اكتشف برامجنا التدريبية المتخصصة في تكنولوجيا المعلومات."}
           </p>
         </motion.div>
       </div>
@@ -204,17 +200,17 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
         }}
       >
         <div className="marquee-track flex gap-8 py-8 px-4">
-          {marqueeProjects.map((project, index) => (
+          {marqueeCourses.map((course, index) => (
             <div
-              key={`${index}-${project.title}`}
+              key={`${index}-${course.title}`}
               className="flex-shrink-0 w-[350px] md:w-[400px] group"
             >
               <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="h-56 overflow-hidden relative">
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors z-10" />
                   <img
-                    src={project.image}
-                    alt={project.title}
+                    src={course.image}
+                    alt={course.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -227,17 +223,17 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                         ['--hover-color' as any]: secondaryColor 
                       }}
                      >
-                      {project.title}
+                      {course.title}
                     </h3>
                   </div>
                   
                   <p className="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 flex-grow">
-                    {project.description}
+                    {course.description}
                   </p>
 
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 2).map((tag, i) => (
+                      {course.tags.slice(0, 2).map((tag, i) => (
                         <span
                           key={i}
                           className="text-[11px] font-semibold px-2.5 py-1 rounded-md tracking-wide uppercase"
@@ -251,10 +247,10 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                       ))}
                     </div>
 
-                    {/* *** CHANGE: Only show the button for the WEB DEVELOPMENT PROJECT *** */}
-                    {project.title === "PORTFOLIO WEB DÉVELOPPEUR" && (
+                    {/* Only show the button for the WEB DEVELOPMENT COURSE */}
+                    {course.title === "DÉVELOPPEMENT WEB FULL STACK" && (
                       <a
-                        href={project.link}
+                        href={course.link}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50 hover:text-white transition-all duration-300"
@@ -269,7 +265,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                           e.currentTarget.style.backgroundColor = '#f9fafb';
                           e.currentTarget.style.color = '#1f2937';
                         }}
-                        aria-label="Voir le projet"
+                        aria-label="Voir la formation"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

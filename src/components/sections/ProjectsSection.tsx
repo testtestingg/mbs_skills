@@ -1,3 +1,4 @@
+// ProjectsSection.tsx (Updated for MBSkills)
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../../types';
@@ -16,136 +17,133 @@ interface ProjectsSectionProps {
 }
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
-  // Updated Purple Color
-  const customPurple = '#8030E3';
+  // Updated Colors
+  const primaryColor = '#122138';
+  const secondaryColor = '#04a3fe';
 
   const projectsData: Project[] = [
-    // GAME PROJECT - Added at the beginning
+    // WEB DEVELOPMENT PROJECT
     {
-      title: "NEON BLAST GAME",
+      title: "PORTFOLIO WEB DÉVELOPPEUR",
       description:
         language === "fr"
-          ? "Un jeu d'action au style néon développé avec HTML5, CSS3 et JavaScript."
+          ? "Projet final de formation en développement web, utilisant HTML5, CSS3 et JavaScript moderne."
           : language === "en"
-          ? "A neon-styled action game built with HTML5, CSS3 and JavaScript."
-          : "لعبة أكشن بأسلوب نيون مبنية باستخدام HTML5 و CSS3 و JavaScript.",
+          ? "Final project of web development training, using HTML5, CSS3 and modern JavaScript."
+          : "مشروع نهائي لتدريب تطوير الويب، باستخدام HTML5 و CSS3 و JavaScript الحديث.",
       image: "https://i.ibb.co/353PrMdM/Screen-Recording2025-12-14at1-56-35-PM-ezgif-com-video-to-gif-converter.gif",
-      tags: ["HTML5", "Canvas API", "JavaScript", "CSS3"],
-      link: "https://www.techytak.tn/game/index.html",
+      tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+      link: "https://www.mbskills.tn/projects/web-portfolio",
     },
     // REAL PROJECTS ----------------------------
     {
       title:
         language === "fr"
-          ? "Automobile"
+          ? "Application E-commerce"
           : language === "en"
-          ? "Auto Marketplace"
-          : "أرغوس أوتوموبيل",
+          ? "E-commerce Application"
+          : "تطبيق التجارة الإلكترونية",
       description:
         language === "fr"
-          ? "Achat/Vente avec estimation IA."
+          ? "Plateforme de vente en ligne complète avec panier d'achat et système de paiement."
           : language === "en"
-          ? "Buy/Sell with AI price estimation."
-          : "بيع وشراء مع تقدير الأسعار بالذكاء الاصطناعي.",
+          ? "Complete online sales platform with shopping cart and payment system."
+          : "منصة مبيعات عبر الإنترنت كاملة مع سلة تسوق ونظام دفع.",
       image: "https://i.ibb.co/C5xM7MPx/2.png",
-      tags: ["AI", "Supabase"],
+      tags: ["React", "Node.js", "MongoDB"],
     },
     {
       title:
         language === "fr"
-          ? "Mobilier & Décoration"
-          : language === "en"
-          ? "Furniture & Home"
-          : "الأثاث وديكور المنزل",
-      description:
-        language === "fr"
-          ? "E-commerce haut de gamme avec interface élégante."
-          : language === "en"
-          ? "Premium e-commerce with elegant interface."
-          : "تجارة إلكترونية راقية بواجهة أنيقة.",
-      image: "https://i.ibb.co/h1M0XzSj/3.png",
-      tags: ["Shop UI", "UX Design"],
-    },
-    {
-      title:
-        language === "fr"
-          ? "Tableau de Bord"
+          ? "Tableau de Bord Analytique"
           : language === "en"
           ? "Analytics Dashboard"
-          : "لوحة التحكم",
+          : "لوحة تحليلية",
       description:
         language === "fr"
-          ? "Visualisation de données et gestion interne."
+          ? "Interface de visualisation de données pour l'analyse des performances commerciales."
           : language === "en"
-          ? "Data visualization and internal management."
-          : "تصور البيانات والإدارة الداخلية.",
+          ? "Data visualization interface for business performance analysis."
+          : "واجهة تصور البيانات لتحليل أداء الأعمال.",
+      image: "https://i.ibb.co/h1M0XzSj/3.png",
+      tags: ["React", "D3.js", "Python"],
+    },
+    {
+      title:
+        language === "fr"
+          ? "Application Mobile de Fitness"
+          : language === "en"
+          ? "Fitness Mobile App"
+          : "تطبيق لياقة بدنية",
+      description:
+        language === "fr"
+          ? "Application mobile pour suivre les entraînements et la progression physique."
+          : language === "en"
+          ? "Mobile application to track workouts and physical progress."
+          : "تطبيق جوال لتتبع التدريبات والتقدم البدني.",
       image: "https://i.ibb.co/WNbVhYPG/202512112151-2.gif",
-      tags: ["Next.js", "PostgreSQL"],
+      tags: ["React Native", "Firebase"],
     },
     {
       title:
         language === "fr"
-          ? "Éducation"
+          ? "Plateforme d'Apprentissage en Ligne"
           : language === "en"
-          ? "Learning Platform"
-          : "منصة تعليمية",
+          ? "Online Learning Platform"
+          : "منصة تعلم عبر الإنترنت",
       description:
         language === "fr"
-          ? "Gestion des cours, examens et espace étudiant."
+          ? "Système complet de gestion de cours avec suivi de progression et évaluations."
           : language === "en"
-          ? "Course management, exams, and student portal."
-          : "إدارة الدروس والامتحانات ومساحة الطالب.",
+          ? "Complete course management system with progress tracking and assessments."
+          : "نظام إدارة دورات كامل مع تتبع التقدم والتقييمات.",
       image: "https://i.ibb.co/ds8KrndC/4.png",
-      tags: ["React", "Supabase"],
+      tags: ["Next.js", "PostgreSQL", "Tailwind CSS"],
     },
     {
       title:
         language === "fr"
-          ? "Site Officiel"
+          ? "Chatbot avec Intelligence Artificielle"
           : language === "en"
-          ? "Official Website"
-          : "الموقع الرسمي",
+          : "ذكاء اصطناعي",
       description:
         language === "fr"
-          ? "Site vitrine optimisé SEO et performance."
+          ? "Chatbot intelligent pour service client avec traitement du langage naturel."
           : language === "en"
-          ? "Showcase site optimized for SEO/Performance."
-          : "موقع تعريفي محسن لمحركات البحث والأداء.",
+          ? "Intelligent chatbot for customer service with natural language processing."
+          : "روبوت دردشة ذكي لخدمة العملاء مع معالجة اللغة الطبيعية.",
       image: "https://i.ibb.co/wZRsW0wJ/5.png",
-      tags: ["Next.js", "SEO"],
+      tags: ["Python", "NLP", "TensorFlow"],
     },
     // FILLER PROJECTS -----------------------------
     {
       title:
         language === "fr"
-          ? "Tableau de bord + Conception créative"
+          ? "Application de Gestion de Projet"
           : language === "en"
-          ? "Dashboard + Creative Design"
-          : "لوحة التحكم + تصميم إبداعي",
+          : "تطبيق إدارة المشروع",
       description:
         language === "fr"
-          ? "Plateforme tout-en-un d'outils créatifs, d'apprentissage et de collaboration"
+          ? "Outil collaboratif pour la gestion de tâches et le suivi de projets d'équipe."
           : language === "en"
-          ? "All-in-one creative tools, learning, collaboration hub."
-          : "مركز متكامل للأدوات الإبداعية والتعلم والتعاون.",
+          : "أداة تعاونية لإدارة المهام وتتبع مشاريع الفريق.",
       image: "https://i.ibb.co/hJVdx8Dk/Screenshot-2025-12-13-at-1-42-32-AM.png",
-      tags: ["Node.js", "MongoDB"],
+      tags: ["Vue.js", "Node.js", "Express"],
     },
     {
       title:
         language === "fr"
-          ? "Landing Page – Studio de Tatouage"
+          ? "Site Web Restaurant"
           : language === "en"
-          ? "Tattoo Studio Landing Page"
-          : "صفحة هبوط – ستوديو وشم",
+          : "موقع مطعم",
       description:
         language === "fr"
-          ? "Landing page moderne pour tatoueur avec galerie, prise de rendez-vous et CTA clair."
+          ? "Site web moderne pour restaurant avec système de réservation en ligne."
           : language === "en"
-          ? "Modern landing page for a tattoo artist featuring gallery, booking section, and clear CTAs."
-          : "صفحة هبوط عصرية لستوديو وشم مع معرض أعمال ونظام حجز ودعوات واضحة للإجراء.",
+          : "Modern restaurant website with online reservation system."
+          : "موقع مطعم حديث مع نظام حجز عبر الإنترنت.",
       image: "https://i.ibb.co/2YLSRMYY/1.png",
-      tags: ["Landing Page", "UI Design", "Branding"],
+      tags: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
     },
   ];
 
@@ -180,20 +178,20 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-tight"
             style={{
-              background: `linear-gradient(135deg, #111827 0%, ${customPurple} 100%)`,
+              background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}
           >
-            {language === 'fr' ? 'Nos Réalisations' :
-             language === 'en' ? 'Featured Work' :
-             'أعمالنا المميزة'}
+            {language === 'fr' ? 'Projets des Étudiants' :
+             language === 'en' ? 'Student Projects' :
+             'مشاريع الطلاب'}
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
-            {language === 'fr' ? "Une sélection de projets numériques innovants et performants." :
-             language === 'en' ? "A selection of innovative and high-performance digital projects." :
-             "مجموعة مختارة من المشاريع الرقمية المبتكرة وذات الأداء العالي."}
+            {language === 'fr' ? "Une sélection de projets réalisés par nos étudiants durant leur formation." :
+             language === 'en' ? "A selection of projects completed by our students during their training." :
+             "مجموعة مختارة من المشاريع التي أكملها طلابنا أثناء تدريبهم."}
           </p>
         </motion.div>
       </div>
@@ -226,7 +224,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                      <h3 
                       className="text-xl font-bold text-gray-900 leading-snug transition-colors line-clamp-1 group-hover:text-[var(--hover-color)]"
                       style={{ 
-                        ['--hover-color' as any]: customPurple 
+                        ['--hover-color' as any]: secondaryColor 
                       }}
                      >
                       {project.title}
@@ -244,8 +242,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                           key={i}
                           className="text-[11px] font-semibold px-2.5 py-1 rounded-md tracking-wide uppercase"
                           style={{
-                            backgroundColor: '#f5f3ff',
-                            color: customPurple,
+                            backgroundColor: '#f0f9ff',
+                            color: secondaryColor,
                           }}
                         >
                           {tag}
@@ -253,8 +251,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                       ))}
                     </div>
 
-                    {/* *** CHANGE: Only show the button for the NEON BLAST GAME *** */}
-                    {project.title === "NEON BLAST GAME" && (
+                    {/* *** CHANGE: Only show the button for the WEB DEVELOPMENT PROJECT *** */}
+                    {project.title === "PORTFOLIO WEB DÉVELOPPEUR" && (
                       <a
                         href={project.link}
                         target="_blank"
@@ -264,14 +262,14 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ language, t }) => {
                           color: '#1f2937' 
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = customPurple;
+                          e.currentTarget.style.backgroundColor = secondaryColor;
                           e.currentTarget.style.color = 'white';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = '#f9fafb';
                           e.currentTarget.style.color = '#1f2937';
                         }}
-                        aria-label="Play Game"
+                        aria-label="Voir le projet"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

@@ -1,4 +1,4 @@
-// src/translations/index.ts (Updated for MBSkills)
+// src/translations.ts (Updated for MBSkills)
 
 export const translations = {
   // Hero Section
